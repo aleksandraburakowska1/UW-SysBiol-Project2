@@ -13,7 +13,7 @@
 Do different PI3K-AKT pathway mutations alter the strength of spatiotemporal ERK signal propagation?
 #### Methods
 
-In Task A1, we modified and ran `compare_spatiotemporal_behavior.py` to compare ERK spatiotemporal signal propagation across five cell lines: WT, AKT1_E17K, PIK3CA_E545K, PIK3CA_H1047R, and PTEN_del. The analysis used `ERKKTR_ratio` as the signal column, `spatial_radius = 60`, `future_window_frames = 3`, and `jump_quantile = 0.9`. Mutation was used as the grouping variable, and the final analysis included 120 experiment-site blocks.
+In Task A1, we modified and ran `compare_spatiotemporal_behavior.py` to compare ERK spatiotemporal signal propagation across five cell lines: WT, AKT1_E17K, PIK3CA_E545K, PIK3CA_H1047R, and PTEN_del. The analysis used `ERKKTR_ratio` as the signal column, with `spatial_radius = 60`, `future_window_frames = 3`, and `jump_quantile = 0.9`. Mutation was used as the grouping variable, and the final analysis included 120 experiment-site blocks.
 
 For each experiment-site block, the script computed the Relative Risk (RR) of a near-future ERK activity jump given current exposure to active neighbouring cells:
 
@@ -22,9 +22,7 @@ RR = \frac{P(\text{future jump} \mid \text{neighbour exposed})}
 {P(\text{future jump} \mid \text{not neighbour exposed})}
 $$
 
-The script generated block-level and group-level summaries. `block_level_summary.csv` contains one row per experiment-site block, including the mutation, jump threshold, number of cells/nodes, spatial and temporal edge counts, exposed and unexposed jump rates, risk difference, and block-level RR. These block-level RR values were used for statistical testing.
-
-`group_level_summary.csv` aggregates the block-level results by mutation and reports summary statistics such as mean and median RR, mean risk difference, exposed and unexposed jump rates, and average edge counts. This file was used to summarize propagation strength across mutations and to generate the comparison plot. The analysis settings and included groups were documented in `task_description.json`.
+The script generated two main summary tables. `block_level_summary.csv` contains one row per experiment-site block, including the mutation, jump threshold, number of cells/nodes, spatial and temporal edge counts, exposed and unexposed jump rates, risk difference, and block-level RR. These block-level RR values were used for statistical testing. `group_level_summary.csv` aggregates the block-level results by mutation and reports summary statistics such as mean and median RR, mean risk difference, exposed and unexposed jump rates, and average edge counts. This file was used to summarize propagation strength across mutations and to generate the comparison plot. The analysis settings and included groups were documented in `task_description.json`.
 
 For each mutation, we computed the mean RR and standard error from block-level RR values:
 
@@ -32,15 +30,11 @@ $$
 SE = \frac{s}{\sqrt{n}}
 $$
 
-where \(s\) is the standard deviation of block-level RR values and \(n\) is the number of analysed blocks. Each mutant was compared with WT using a two-sided Mann–Whitney U test. We used the Mann–Whitney U test because the comparison involved independent groups of block-level RR values: WT blocks versus blocks from each mutant cell line. This test is non-parametric, meaning that it does not require the RR values to follow a normal distribution. The Mann–Whitney U test evaluates whether values from one group tend to be systematically higher or lower than values from another group. In our case, it tested whether the distribution of block-level RR values for each mutant differed from the distribution observed in WT.
+where \(s\) is the standard deviation of block-level RR values and \(n\) is the number of analysed blocks.
+
+Each mutant was compared with WT using a two-sided Mann–Whitney U test. We used this test because the comparison involved independent groups of block-level RR values: WT blocks versus blocks from each mutant cell line. The Mann–Whitney U test is non-parametric, so it does not require RR values to follow a normal distribution. This was appropriate because block-level propagation metrics may be skewed or affected by differences between experiment-site blocks. In our analysis, the test evaluated whether the distribution of block-level RR values for each mutant differed from the distribution observed in WT.
 
 Since four mutant-vs-WT comparisons were performed, p-values were corrected using the Bonferroni method:
-
-$$
-p_{\text{corrected}} = \min(p \cdot 4, 1)
-$$
-
-Mutations with corrected \(p < 0.05\) were considered significantly different from WT.Since four mutant-vs-WT comparisons were performed, p-values were corrected using the Bonferroni method:
 
 $$
 p_{\text{corrected}} = \min(p \cdot 4, 1)
