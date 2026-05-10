@@ -32,7 +32,15 @@ $$
 SE = \frac{s}{\sqrt{n}}
 $$
 
-where \(s\) is the standard deviation of block-level RR values and \(n\) is the number of analysed blocks. Each mutant was compared with WT using a two-sided Mann–Whitney U test. Since four mutant-vs-WT comparisons were performed, p-values were corrected using the Bonferroni method:
+where \(s\) is the standard deviation of block-level RR values and \(n\) is the number of analysed blocks. Each mutant was compared with WT using a two-sided Mann–Whitney U test. We used the Mann–Whitney U test because the comparison involved independent groups of block-level RR values: WT blocks versus blocks from each mutant cell line. This test is non-parametric, meaning that it does not require the RR values to follow a normal distribution. The Mann–Whitney U test evaluates whether values from one group tend to be systematically higher or lower than values from another group. In our case, it tested whether the distribution of block-level RR values for each mutant differed from the distribution observed in WT.
+
+Since four mutant-vs-WT comparisons were performed, p-values were corrected using the Bonferroni method:
+
+$$
+p_{\text{corrected}} = \min(p \cdot 4, 1)
+$$
+
+Mutations with corrected \(p < 0.05\) were considered significantly different from WT.Since four mutant-vs-WT comparisons were performed, p-values were corrected using the Bonferroni method:
 
 $$
 p_{\text{corrected}} = \min(p \cdot 4, 1)
