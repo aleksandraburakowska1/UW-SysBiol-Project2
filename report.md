@@ -31,9 +31,9 @@ $$
 
 where \(s\) is the standard deviation of block-level RR values and \(n\) is the number of analysed blocks. Each mutant was compared with WT using a two-sided Mann–Whitney U test. P-values were corrected for four comparisons using Bonferroni correction:
 
-\[
+$$
 p_{\text{corrected}} = \min(p \cdot 4, 1)
-\]
+$$
 
 #### Results
 
