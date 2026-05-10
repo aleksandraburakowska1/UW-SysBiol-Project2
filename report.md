@@ -51,7 +51,11 @@ All analysed cell lines showed mean Relative Risk values above 1. WT had a mean 
 **Figure 1.** Mean Relative Risk (RR) of ERK spatiotemporal propagation across PI3K-AKT pathway mutations. Bars show the mean block-level RR for each mutation, and error bars show the standard error. The dashed horizontal line marks \(RR = 1\), which corresponds to no neighbour-associated increase in the probability of a future ERK jump. Values above 1 indicate that cells exposed to active neighbouring cells were more likely to show a near-future ERK activity jump. Asterisks indicate mutations that were significantly different from WT after Bonferroni correction.
 #### Interpretation
 
-TODO: write 150–250 words after checking exact values from `mutations_comparison_table.csv`.
+The results indicate that PI3K-AKT pathway mutations alter the strength of neighbour-linked ERK signal propagation, but not in the same direction for all mutants. Since all analysed groups had mean RR values above 1, ERK activity was locally coordinated in every cell line: cells exposed to active neighbours were more likely to show a near-future ERK jump than non-exposed cells.
+
+The strongest effect was observed for PIK3CA_H1047R, which showed a much higher RR than WT and was significantly different after Bonferroni correction. This suggests that PIK3CA_H1047R may enhance local ERK signal propagation. One possible biological explanation is that this mutation strongly activates PI3K signalling and may increase pathway cross-talk or sensitivity to neighbour-derived signals, making ERK activation more coordinated across nearby cells.
+
+In contrast, AKT1_E17K and PTEN_del showed significantly lower RR values than WT. This does not mean that propagation disappeared, because their RR values were still above 1, but it suggests weaker neighbour-associated ERK coordination relative to WT. PIK3CA_E545K behaved similarly to WT and was not significantly different, indicating that not all PI3K-pathway mutations have the same effect on ERK propagation. Overall, these results support the conclusion that different molecular perturbations within the PI3K-AKT pathway can change spatiotemporal ERK dynamics in distinct ways.
 
 ---
 
