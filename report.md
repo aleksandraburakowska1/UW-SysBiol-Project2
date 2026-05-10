@@ -42,7 +42,7 @@ The full comparison table was saved as `outputs/mutations_comparison_table.csv`.
 All analysed cell lines showed mean Relative Risk values above 1. WT had a mean RR of 1.74. Among the mutants, PIK3CA_H1047R showed the highest mean RR of 3.20 and was significantly different from WT after Bonferroni correction $$(\(p = 1.23 \times 10^{-8}\))$$. PIK3CA_E545K had a mean RR of 1.71 and was not significantly different from WT $$(\(p = 0.73\))$$. AKT1_E17K and PTEN_del showed lower mean RR values than WT, with mean RR values of 1.58 and 1.56, respectively. Both were significantly different from WT after correction..
 
 ![Mean ERK spatiotemporal propagation across mutations](outputs/mutations_barplot.png)
-
+**Figure 1.** Mean Relative Risk (RR) of ERK spatiotemporal propagation across PI3K-AKT pathway mutations. Bars show the mean block-level RR for each mutation, and error bars show the standard error. The dashed horizontal line marks \(RR = 1\), which corresponds to no neighbour-associated increase in the probability of a future ERK jump. Values above 1 indicate that cells exposed to active neighbouring cells were more likely to show a near-future ERK activity jump. Asterisks indicate mutations that were significantly different from WT after Bonferroni correction.
 #### Interpretation
 
 TODO: write 150–250 words after checking exact values from `mutations_comparison_table.csv`.
