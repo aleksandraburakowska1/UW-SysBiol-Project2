@@ -34,7 +34,15 @@ where \(s\) is the standard deviation of block-level RR values and \(n\) is the 
 $$
 p_{\text{corrected}} = \min(p \cdot 4, 1)
 $$
+#### Output files
 
+The A1 analysis produced three main output files in `analysis_outputs_A1/comparison_mutation_ERKKTR_ratio/`.
+
+`task_description.json` contains metadata describing the analysis setup. It records the main comparison question, the grouping variable, the analysed signal, parameter values, and the groups included in the analysis. In this task, the analysis compared mutations using `ERKKTR_ratio`, with `spatial_radius = 60` and `future_window_frames = 3`. The file confirms that 120 experiment-site blocks were analysed and that the included groups were WT, AKT1_E17K, PIK3CA_E545K, PIK3CA_H1047R, and PTEN_del.
+
+`block_level_summary.csv` contains the detailed results for each individual experiment-site block. Each row corresponds to one analysed block and includes the experiment ID, site ID, mutation, signal column, jump threshold, number of cells/nodes, number of spatial and temporal edges, exposed and unexposed jump rates, risk difference, and block-level Relative Risk. This file was used for statistical testing, because Mann–Whitney U tests should compare the distributions of block-level RR values rather than only group means.
+
+`group_level_summary.csv` contains the aggregated mutation-level results. It summarizes the block-level outputs by mutation and reports the number of analysed blocks, number of unique sites and experiments, total number of nodes, mean and median Relative Risk, mean risk difference, mean exposed and unexposed jump rates, and average numbers of spatial and temporal edges. This file was used to identify the overall propagation strength for each mutation and to generate the group-level comparison plot.
 #### Results
 
 The full comparison table was saved as `outputs/mutations_comparison_table.csv`.
