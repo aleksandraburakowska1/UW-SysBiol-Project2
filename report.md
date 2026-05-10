@@ -18,15 +18,16 @@ In Task A1, we modified and ran compare_spatiotemporal_behavior.py to compare ER
 
 For each experiment-site block, the script computed the Relative Risk (RR) of a near-future ERK activity jump given current exposure to active neighbouring cells:
 
-\[
-RR = \frac{P(\text{future jump} \mid \text{neighbour exposed})}{P(\text{future jump} \mid \text{not neighbour exposed})}
-\]
+$$
+RR = \frac{P(\text{future jump} \mid \text{neighbour exposed})}
+{P(\text{future jump} \mid \text{not neighbour exposed})}
+$$
 
 The block-level RR values were aggregated by mutation. Mean RR and standard error were computed for each mutation:
 
-\[
+$$
 SE = \frac{s}{\sqrt{n}}
-\]
+$$
 
 where \(s\) is the standard deviation of block-level RR values and \(n\) is the number of analysed blocks. Each mutant was compared with WT using a two-sided Mann–Whitney U test. P-values were corrected for four comparisons using Bonferroni correction:
 
