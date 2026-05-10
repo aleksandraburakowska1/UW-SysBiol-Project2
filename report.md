@@ -32,7 +32,7 @@ $$
 
 where \(s\) is the standard deviation of block-level RR values and \(n\) is the number of analysed blocks.
 
-Each mutant was compared with WT using a two-sided Mann–Whitney U test. We used this test because the comparison involved independent groups of block-level RR values: WT blocks versus blocks from each mutant cell line. The Mann–Whitney U test is non-parametric, so it does not require RR values to follow a normal distribution. This was appropriate because block-level propagation metrics may be skewed or affected by differences between experiment-site blocks. In our analysis, the test evaluated whether the distribution of block-level RR values for each mutant differed from the distribution observed in WT.
+Each mutant was compared with WT using a two-sided Mann–Whitney U test. We used this test because the comparison involved independent groups of block-level RR values: WT blocks versus blocks from each mutant cell line. The Mann–Whitney U test is non-parametric, so it does not require RR values to follow a normal distribution. In our analysis, the test evaluated whether the distribution of block-level RR values for each mutant differed from the distribution observed in WT.
 
 Since four mutant-vs-WT comparisons were performed, p-values were corrected using the Bonferroni method:
 
