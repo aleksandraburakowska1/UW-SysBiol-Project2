@@ -111,21 +111,11 @@ The lagged exposure analysis showed that all three groups had the strongest neig
 
 #### Interpretation
 
-The results suggest that the strongest detectable neighbour-linked ERK propagation occurs at the shortest measured timescale. Since the optimal lag was \(\tau^* = 0\) minutes for WT, PIK3CA_H1047R, and PTEN_del, we did not observe evidence for a delayed propagation peak within the 0–30 minute window. Instead, the effect was strongest when neighbour activity and future self-jump probability were evaluated without an additional lag.
+The results suggest that the strongest detectable neighbour-linked ERK propagation occurs at the shortest measured timescale. Since the optimal lag was $$\(\tau^* = 0\)$$ minutes for WT, PIK3CA_H1047R, and PTEN_del, we did not observe evidence for a delayed propagation peak within the 0–30 minute window. Instead, the effect was strongest when neighbour activity and future self-jump probability were evaluated without an additional lag.
 
 PIK3CA_H1047R showed the strongest early propagation signal, consistent with Task A1, where this mutation had the highest overall RR. However, its RR decreased rapidly with increasing lag, reaching approximately 1 by 30 minutes. This suggests that the neighbour-associated ERK coordination in PIK3CA_H1047R is strong but short-lived. WT showed a more moderate but more persistent signal, remaining above 1 across the full lag range. PTEN_del showed the weakest propagation among the three selected groups and approached 1 by 30 minutes, indicating that the neighbour effect largely disappeared at longer delays.
 
 Overall, the A2 results suggest that the selected mutations differ mainly in propagation strength rather than in the timing of the propagation peak. All three groups had the same optimal lag, but PIK3CA_H1047R showed a much stronger immediate response than WT or PTEN_del.
-
-#### Results
-
-TODO: insert lagged exposure plot and table.
-
-#### Interpretation
-
-TODO.
-
----
 
 ### Task A3 — Parameter Robustness Assessment
 
