@@ -99,7 +99,7 @@ The full lagged results were saved in `outputs/lagged_exposure_full_results.csv`
 
 **Figure 2.** Lagged Relative Risk $$\(RR(\tau)\)$$ for WT, PIK3CA_H1047R, and PTEN_del. The dashed horizontal line marks \(RR = 1\), corresponding to no neighbour-associated increase in the probability of a future ERK jump.
 
-| Mutation | Optimal lag \(\tau^*\) | Optimal lag (min) | Maximum RR |
+| Mutation | Optimal lag $$\(\tau^*\)$$ | Optimal lag (min) | Maximum RR |
 |---|---:|---:|---:|
 | WT | 0 | 0 | 1.756 |
 | PIK3CA_H1047R | 0 | 0 | 2.843 |
@@ -107,7 +107,7 @@ The full lagged results were saved in `outputs/lagged_exposure_full_results.csv`
 
 **Table 2.** Optimal lag summary for lagged ERK propagation. For all three groups, the maximum $$\(RR(\tau)\)$$ occurred at $$\(\tau = 0\)$$ minutes.
 
-The lagged exposure analysis showed that all three groups had the strongest neighbour-associated ERK propagation at \(\tau = 0\) minutes. PIK3CA_H1047R had the highest initial lagged RR, with \(RR(0) = 2.84\), followed by WT with \(RR(0) = 1.76\), and PTEN_del with \(RR(0) = 1.57\). In all groups, \(RR(\tau)\) decreased as the lag increased from 0 to 30 minutes. By 30 minutes, PIK3CA_H1047R decreased to approximately \(RR = 0.99\), PTEN_del to \(RR = 1.02\), and WT to \(RR = 1.23\).
+The lagged exposure analysis showed that all three groups had the strongest neighbour-associated ERK propagation at $$\(\tau = 0\)$$ minutes. PIK3CA_H1047R had the highest initial lagged RR, with $$\(RR(0) = 2.84\)$$, followed by WT with $$\(RR(0) = 1.76\)$$, and PTEN_del with $$\(RR(0) = 1.57\)$$. In all groups, $$(RR(\tau)\)$$ decreased as the lag increased from 0 to 30 minutes. By 30 minutes, PIK3CA_H1047R decreased to approximately \(RR = 0.99\), PTEN_del to \(RR = 1.02\), and WT to \(RR = 1.23\).
 
 #### Interpretation
 
