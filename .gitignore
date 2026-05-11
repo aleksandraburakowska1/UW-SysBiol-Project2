@@ -1,4 +1,4 @@
-# ── Virtual environment ───────────────────────────────────────────────────────
+# ── Virtual environment ──────────────────────────────────────────────────────
 .venv/
 venv/
 env/
@@ -10,15 +10,24 @@ __pycache__/
 *.csv.gz
 *.csv.zip
 01-readme-*.csv
+single-cell-tracks_exp1-6_noErbB2.csv.gz
 
-# ── Analysis outputs (generated locally by running the scripts) ───────────────
+# ── Analysis outputs generated locally ───────────────────────────────────────
 analysis_outputs/
+analysis_outputs_A1/
+
+# keep final small deliverables
+!outputs/
+!outputs/*.png
+!outputs/*.csv
 
 # ── Folders not for public repo ──────────────────────────────────────────────
 teacher-notebooks/
-notebooks/
 spatiotemporal-starter/
 spatiotemporal-starter.zip
+
+# ── Jupyter temporary files ──────────────────────────────────────────────────
+.ipynb_checkpoints/
 
 # ── LaTeX build artefacts ────────────────────────────────────────────────────
 notes/*.aux
@@ -27,7 +36,7 @@ notes/*.out
 notes/*.toc
 notes/*.synctex.gz
 
-# ── macOS / editor junk ───────────────────────────────────────────────────────
+# ── macOS / editor junk ──────────────────────────────────────────────────────
 .DS_Store
 .idea/
 .vscode/
