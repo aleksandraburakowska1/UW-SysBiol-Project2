@@ -16,7 +16,7 @@ single-cell-tracks_exp1-6_noErbB2.csv.gz
 analysis_outputs/
 analysis_outputs_A1/
 
-# keep final small deliverables
+# ── Keep final small deliverables ────────────────────────────────────────────
 !outputs/
 !outputs/*.png
 !outputs/*.csv
