@@ -123,40 +123,4 @@ Overall, the A2 results suggest that the selected mutations differ mainly in pro
 
 How sensitive is the Relative Risk metric to analysis parameter choices?
 
-#### Methods
 
-TODO.
-
-#### Results
-
-TODO: insert robustness plot.
-
-#### Recommendation
-
-TODO.
-
----
-
-## Part B: Independent Research
-
-### Research question and hypothesis
-
-TODO.
-
-### Methods
-
-TODO.
-
-### Results
-
-TODO.
-
-### Discussion
-
-TODO.
-
----
-
-## References
-
-TODO.
