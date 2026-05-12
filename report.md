@@ -125,8 +125,19 @@ How sensitive is the Relative Risk metric to analysis parameter choices?
 
 #### Methods
 
-#### Results
+In Task A3, we assessed how sensitive the ERK propagation Relative Risk metric was to the choice of spatial neighbourhood radius. The analysis was performed in `notebooks/TaskA3.ipynb`. We used the WT reference block (`exp_id = 1`, `site_id = 1`) and ran `spatiotemporal_signal_propagation.py` multiple times while varying `spatial_radius`.
 
-#### Interpretation
+We tested four spatial radius values:
+
+$$
+r = 30, 60, 90, 150
+$$
+
+For each value of \(r\), the analysis used `ERKKTR_ratio` as the signal column, with `future_window_frames = 3` and `jump_quantile = 0.9` kept constant. Each run generated a separate sweep folder in `analysis_outputs/`, for example `sweep_r30`, `sweep_r60`, `sweep_r90`, and `sweep_r150`.
+
+For each sweep folder, we extracted the Relative Risk value from:
+
+```text
+exp_1_site_1_ERKKTR_ratio/summary.json
 
 
