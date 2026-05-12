@@ -135,10 +135,7 @@ $$
 
 For each value of \(r\), the analysis used `ERKKTR_ratio` as the signal column, with `future_window_frames = 3` and `jump_quantile = 0.9` kept constant. Each run generated a separate sweep folder in `analysis_outputs/`, for example `sweep_r30`, `sweep_r60`, `sweep_r90`, and `sweep_r150`.
 
-For each sweep folder, we extracted the Relative Risk value from:
-
-```text
-exp_1_site_1_ERKKTR_ratio/summary.json
+For each sweep folder, we extracted the Relative Risk value from: exp_1_site_1_ERKKTR_ratio/summary.json
 
 #### Results
 
