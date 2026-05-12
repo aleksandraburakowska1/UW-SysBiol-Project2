@@ -140,4 +140,19 @@ For each sweep folder, we extracted the Relative Risk value from:
 ```text
 exp_1_site_1_ERKKTR_ratio/summary.json
 
+#### Results
+
+![Parameter robustness: spatial radius sweep](outputs/parameter_robustness_spatial_radius.png)
+
+**Figure 3.** Relative Risk as a function of spatial radius for the WT reference block. The dashed horizontal line marks \(RR = 1\), corresponding to no neighbour-associated increase in future ERK jumping. RR decreased as the spatial radius increased, suggesting that the metric is sensitive to how the local neighbourhood is defined.
+
+| Spatial radius | Relative Risk |
+|---:|---:|
+| 30 | 2.068 |
+| 60 | 1.756 |
+| 90 | 1.605 |
+| 150 | 1.328 |
+
+**Table 3.** Spatial radius sweep results. Relative Risk remained above 1 for all tested values, but decreased with increasing radius.
+
 
