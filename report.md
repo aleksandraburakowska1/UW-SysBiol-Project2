@@ -107,7 +107,7 @@ The full lagged results were saved in `outputs/lagged_exposure_full_results.csv`
 
 **Table 2.** Optimal lag summary for lagged ERK propagation. For all three groups, the maximum $RR(\tau)$ occurred at $\tau = 0$ minutes.
 
-The lagged exposure analysis showed that all three groups had the strongest neighbour-associated ERK propagation at $\tau = 0$ minutes. PIK3CA_H1047R had the highest initial lagged RR, with $$\(RR(0) = 2.84\)$$, followed by WT with $$\(RR(0) = 1.76\)$$, and PTEN_del with $$\(RR(0) = 1.57\)$$. In all groups, $$(RR(\tau)\)$$ decreased as the lag increased from 0 to 30 minutes. By 30 minutes, PIK3CA_H1047R decreased to approximately \(RR = 0.99\), PTEN_del to \(RR = 1.02\), and WT to \(RR = 1.23\).
+The lagged exposure analysis showed that all three groups had the strongest neighbour-associated ERK propagation at $\tau = 0$ minutes. PIK3CA_H1047R had the highest initial lagged RR, with $RR(0) = 2.84$, followed by WT with $RR(0) = 1.76$, and PTEN_del with $RR(0) = 1.57$. In all groups, $RR(\tau)$ decreased as the lag increased from 0 to 30 minutes. By 30 minutes, PIK3CA_H1047R decreased to approximately \(RR = 0.99\), PTEN_del to \(RR = 1.02\), and WT to \(RR = 1.23\).
 
 #### Interpretation
 
@@ -153,6 +153,6 @@ For each sweep folder, we extracted the Relative Risk value from: exp_1_site_1_E
 **Table 3.** Spatial radius sweep results. Relative Risk remained above 1 for all tested values, but decreased with increasing radius.
 #### Recommendation
 
-Based on the spatial radius sweep, we recommend using `spatial_radius = 60` for the main analysis. The RR value decreased as the spatial radius increased: \(RR = 2.07\) at \(r = 30\), \(RR = 1.76\) at \(r = 60\), \(RR = 1.61\) at \(r = 90\), and \(RR = 1.33\) at \(r = 150\). This shows that the metric is sensitive to the neighbourhood definition, but the propagation signal remains above \(RR = 1\) across all tested values. Biologically, \(r = 30\) may be too restrictive because it captures only very close neighbours, while \(r = 150\) likely includes distant cells and dilutes local coordination. A radius of 60 provides a balanced choice: it preserves a strong neighbour-associated ERK propagation signal while maintaining a biologically interpretable local neighbourhood.
+Based on the spatial radius sweep, we recommend using `spatial_radius = 60` for the main analysis. The RR value decreased as the spatial radius increased: $RR = 2.07$ at $r = 30$, $RR = 1.76$ at $r = 60$, $RR = 1.61$ at $r = 90$, and $RR = 1.33$ at $r = 150$. This shows that the metric is sensitive to the neighbourhood definition, but the propagation signal remains above $RR = 1$ across all tested values. Biologically, $r = 30$ may be too restrictive because it captures only very close neighbours, while $r = 150$ likely includes distant cells and weakens the local coordination signal. A radius of 60 provides a balanced choice: it preserves a strong neighbour-associated ERK propagation signal while maintaining a biologically interpretable local neighbourhood.
 
 
