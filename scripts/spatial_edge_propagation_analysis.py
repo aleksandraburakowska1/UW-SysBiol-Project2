@@ -71,7 +71,7 @@ def parse_args() -> argparse.Namespace:
         help='Path to the primary compressed single-cell tracking CSV table.',
     )
     parser.add_argument(
-        '--metadata-path',
+        '--meta-path',
         type=str,
         default='01-readme-experiment-description_2022-04-05.csv',
         help='Path to the experimental metadata reference document.',
@@ -192,7 +192,7 @@ def main() -> None:
     args = parse_args()
 
     data_path = resolve_path(Path(args.data_path))
-    metadata_path = resolve_path(Path(args.metadata_path))
+    metadata_path = resolve_path(Path(args.meta_path))
     output_dir = resolve_path(Path(args.output_dir))
     output_dir.mkdir(parents=True, exist_ok=True)
     
