@@ -158,11 +158,177 @@ Based on the spatial radius sweep, we recommend using `spatial_radius = 60` for 
 
 ## TASK B2: Spatial Heterogeneity Analysis
 
-#### Research question
+### Research question
 Do cells at the edge of the field-of-view may exhibit different propagation
 behavior than central cells due to boundary effects or lower neighbor counts.
-#### Methods
-![Demonstration](outputs/cell_propagation_boundaries.gif)
-#### Results 
+### Methods
 
-#### Interpretation
+#### Spatial Categorization and Population Truncation
+To systematically investigate potential boundary artifacts and analyze
+spatial heterogeneity, cells were classified dynamically into Edge and
+Central sub-populations. Static coordinate thresholds are insufficient
+for long-term live-imaging datasets due to the collective migration,
+expansion, or contraction of the cell monolayer over time. To overcome
+this limitation, an adaptive, frame-by-frame percentile bounding algorithm
+was developed. At each discrete time point ($t$), the spatial distribution
+of all tracked cell centroids was independently computed. Boundary margins
+were established by calculating the 5th and 95th percentiles for both the $X$ and $Y$ coordinate vectors within that specific frame:
+
+$$X_{\text{low}} = \text{Percentile}(X, 5\%), \quad X_{\text{high}} = \text{Percentile}(X, 95\%)$$
+$$Y_{\text{low}} = \text{Percentile}(Y, 5\%), \quad Y_{\text{high}} = \text{Percentile}(Y, 95\%)$$
+
+A single cell-time observation node was categorized as an Edge cell if
+its coordinates fell outside this adaptive inner bounding box
+($X \le X_{\text{low}}$ or $X \ge X_{\text{high}}$ or
+$Y \le Y_{\text{low}}$ or $Y \ge Y_{\text{high}}$). 
+Conversely, nodes satisfying all internal constraints were
+categorized as Central cells.
+
+![Demonstration](outputs/cell_propagation_boundaries.gif)
+
+**Figure 4.** Animated visualization demonstrating the dynamic spatial
+classification of the moving cell layer from site 1 of the first experiment. Red markers indicate
+cells captured within the perimeter of the adaptive frame-by-frame percentile boundary (Edge category), while light gray markers indicate the core cell population (Central category).
+
+#### Pipeline Orchestration and Network Connectivity Verification
+The batch processing architecture was implemented in the standalone 
+executable script `spatial_edge_propagation_analysis.py`. 
+To optimize host memory utilization and prevent kernel out-of-memory 
+crashes during the ingestion of multi-experiment single-cell datasets, 
+data columns were processed sequentially in independent chunks grouped 
+by Experiment ID. Within each distinct imaging site, 
+a local spatiotemporal network was natively reconstructed by computing 
+biosensor ratio deltas, identifying coordinate activation jumps based 
+on the 95th quantile threshold, mapping spatial neighbor links within a 
+fixed 60 unit radius, and flagging subsequent near-future cell activation
+responses within a three-frame window.
+
+Once the networks were established and annotated with the adaptive spatial
+boundaries, the local neighbor connectivity was validated. 
+Because the scanning radius circle of an edge cell partially
+overlaps empty space outside the field of view, boundary constraints
+are hypothesized to induce a systematic neighbor deficit. To rigorously
+verify this geometric effect on a local level, a non-parametric 
+Mann-Whitney U test was performed independently for each individual 
+imaging block. This test evaluated the raw shift in the underlying
+`neighbor_count` continuous distributions between the Edge and Central
+cell node populations.
+
+#### Population-Scale Statistical Inference
+Following the localized pipeline extraction, the compiled site-level
+metrics from all processed experiment blocks were aggregated into a 
+unified summary matrix to evaluate the biological consequences of 
+the boundary effect. 
+Relative Risk ($RR$) and Risk Difference ($RD$) metrics were calculated 
+independently for both spatial zones at each site to quantify the probability
+amplification of a kinase activation cascade given a concurrent neighboring
+jump event. 
+
+High-level population inference was achieved by applying
+a non-parametric Wilcoxon signed-rank test across the paired site vectors (Implemented in the `TaskB2.ipynb` notebook).
+This statistical test evaluated the null hypothesis that the distribution 
+of Relative Risk remains symmetric and unchanged between the
+ central core and boundaries. 
+ 
+### Results
+
+#### Descriptive Summaries and Visual Trends
+All 120 independent sites present in dataset were processed
+and analyzed. A site-by-site comparison revealed that
+the Relative Risk at the boundary exceeded the central core
+($RR_{\text{edge}} > RR_{\text{central}}$) in only 19 out of 120
+sites (15.8%). Similarly, the Risk Difference at the boundary
+was higher than the center ($RD_{\text{edge}} > RD_{\text{central}}$)
+in 43 sites (35.8%). Notably, across all 120 analyzed sites, the mean
+number of neighbors for cells in the edge category never exceeded the 
+neighbor count of the central population, maintaining a steady average
+deficit of approximately 2 neighbors per cell near the field-of-view 
+boundaries. 
+These consistent discrepancies between the spatial zones are clearly visible across all three subplots.
+![spatial_result_plots](outputs/spatial_heterogeneity_analysis_plots.png)
+**Figure 5.** Multi-panel visualization comparing central and edge cell
+populations across all 120 imaging sites, with independent subplots sorted
+by their respective ascending central values. Panels display the site-level
+values for (A) Relative Risk ($RR$) central versus edge trends,
+(B) Risk Difference ($RD$) central versus edge trends, and (C)
+Mean neighbor counts highlighting the persistent gap between
+central and edge connectivity.
+
+#### Localized Neighborhood Connectivity Analysis
+To statistically validate the physical neighbor deficit observed at
+the boundaries, independent Mann-Whitney U tests were performed
+on the neighbor count distributions for each of the 120 sites. 
+Every single localized test returned a calculated $p$-value
+of $0.0000\text{e}+00$.
+
+#### Population-Scale Propagation Inference
+A higher-level statistical inference was conducted using all 120 
+paired sites to evaluate the impact of these spatial constraints
+on signal propagation. The non-parametric Wilcoxon signed-rank test 
+was applied to the matched pairs of $RR_{\text{edge}}$ and
+$RR_{\text{central}}$ under the null hypothesis ($H_0$) that both
+spatial zones share the same Relative Risk distribution, against 
+the alternative hypothesis ($H_1$) that the $RR$ shifts significantly
+between the center and the boundary.
+
+The test yielded a Wilcoxon statistic of 546.0 with a calculated $p$-value of $6.6602 \times 10^{-16}$. Because $p < 0.05$, the null hypothesis is rejected, demonstrating a statistically significant difference in signal propagation efficiency between edge and central cell matrices. The population-wide mean Relative Risk was $1.799$ for the edge zone compared to $2.014$ for the central core. These metrics indicate that spatial boundary constraints and their associated neighbor deficits are accompanied by a significant reduction in the likelihood of neighbor-driven signal propagation.
+
+### Discussion and Interpretation
+
+#### Methodological Evaluation of Percentile-Based Classification
+The frame-by-frame adaptive classification method demonstrated high
+structural validity, as evidenced by the stable and statistically
+robust neighbor count deficits consistently observed at the margins.
+This approach represents an advancement over static spatial
+grids by successfully adapting to the dynamic movement and geometric
+changes of the cell monolayer. However, a key limitation of this
+percentile-based boundary definition ($5^{\text{th}}$ and $95^{\text{th}}$
+percentiles) is its strict dependence on absolute cell density.
+In highly confluent imaging fields, a fixed $5\%$ coordinate margin 
+can geographically span multiple cell layers. If the physical width
+of this boundary zone exceeds the defined $60\,\mu\text{m}$ spatial
+neighbor interaction radius, cells located deeper in the
+layer -- which maintain complete, central-like local connectivity are
+falsely categorized as Edge nodes. To refine this methodology, future iterations 
+should implement a dynamic margin calculated as a functional
+derivative of local cell density and total occupied surface area,
+maintaining a constant boundary width relative to the interaction radius.
+
+#### Graph Constraints and Signal Propagation Deficit
+The significant population-wide reduction in Relative Risk
+($RR_{\text{edge}} = 1.799$ vs $RR_{\text{central}} = 2.014$) 
+mathematically validates that cells captured at the field-of-view 
+ periphery exhibit diminished coordination with their microenvironment.
+This phenomenon is primarily a consequence of spatial graph truncation 
+imposed by the physical limits of the microscope sensor. While these cells
+likely reside within a continuous, unperturbed tissue matrix in vivo, 
+the imaging constraint forces a zero-neighbor assumption for all space 
+outside the visible frame. Because the algorithm cannot account for 
+unobserved signaling events occurring just beyond the FOV, the true 
+upstream exposure of peripheral cells is systematically underestimated.
+This missing data artificially deflates the conditional probability 
+of neighbor-driven activation, directly lowering the calculated $RR$.
+Consequently, to ensure absolute accuracy in downstream spatiotemporal 
+analyses, cells falling within this boundary zone should be excluded 
+from acting as target nodes, serving strictly as edge-smoothing padding
+to protect the integrity of core transmission metrics.
+
+#### Network Topology and Signal Percolation Dynamics
+Beyond purely geometric imaging artifacts, the observed propagation
+drop can be explained through the lens of network topology and
+percolation theory. Intercellular signaling cascades, such as 
+ERK activation waves, rely heavily on path redundancy within
+the cellular network. In the central core of the monolayer,
+the high node degree (average connectivity) provides multiple 
+alternative spatial routes for a signal to propagate.
+If a specific neighboring cell is transiently non-responsive 
+or in a refractory state, the signaling front can simply bypass
+it via adjacent nodes, sustaining the wave. At the truncated 
+boundary, this topological redundancy is lost. The edge represents
+a low-degree peripheral network where signal transmission transitions
+from a multi-directional wave into a strict linear chain. In such
+constrained configurations, any localized failure of a single node
+to transmit the kinase signal acts as a hard bottleneck, prematurely 
+terminating the propagation cascade. This loss of alternative routing 
+pathways fundamentally drives the lower collective efficiency
+of signal transmission near spatial boundaries.
